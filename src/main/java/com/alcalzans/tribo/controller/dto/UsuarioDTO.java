@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsultaUsuarioDTO {
+public class UsuarioDTO {
     private Long id;
     private List<Perfil> perfis = new ArrayList<>();
     private String nome;
@@ -17,7 +17,7 @@ public class ConsultaUsuarioDTO {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataCancelamento;
 
-    public ConsultaUsuarioDTO(Usuario usuario) {
+    public UsuarioDTO(Usuario usuario) {
         this.id = usuario.getId();
         this.perfis = usuario.getPerfis();
         this.nome = usuario.getNome();

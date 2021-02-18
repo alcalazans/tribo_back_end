@@ -3,6 +3,7 @@ package com.alcalzans.tribo.controller;
 import com.alcalzans.tribo.config.security.TokenService;
 import com.alcalzans.tribo.controller.dto.TokenDto;
 import com.alcalzans.tribo.controller.form.LoginForm;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AutenticacaoController {
 
 	@Autowired
@@ -25,6 +26,7 @@ public class AutenticacaoController {
 	@Autowired
 	private TokenService tokenService;
 
+	@ApiOperation(value = "Efetuar Login")
 	@PostMapping
 	public ResponseEntity<TokenDto> autenticar(@RequestBody @Validated LoginForm form) {
 		UsernamePasswordAuthenticationToken dadosLogin = form.converter();
