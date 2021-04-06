@@ -1,8 +1,8 @@
 package com.alcalazans.tribo.controller;
 
-import com.alcalazans.tribo.controller.form.LoginForm;
+import com.alcalazans.tribo.controller.dto.request.LoginRequestDto;
 import com.alcalazans.tribo.config.security.TokenService;
-import com.alcalazans.tribo.controller.dto.TokenDto;
+import com.alcalazans.tribo.controller.dto.response.TokenDto;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class AutenticacaoController {
 
 	@ApiOperation(value = "Efetuar Login")
 	@PostMapping
-	public ResponseEntity<TokenDto> autenticar(@RequestBody @Validated LoginForm form) {
+	public ResponseEntity<TokenDto> autenticar(@RequestBody @Validated LoginRequestDto form) {
 		UsernamePasswordAuthenticationToken dadosLogin = form.converter();
 		
 		try {

@@ -1,11 +1,11 @@
-package com.alcalazans.tribo.controller.form;
+package com.alcalazans.tribo.controller.dto.request;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class LoginForm {
+public class LoginRequestDto {
 
 	@NotNull @NotEmpty
 	private String email;

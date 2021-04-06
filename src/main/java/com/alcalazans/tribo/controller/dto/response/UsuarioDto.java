@@ -1,4 +1,4 @@
-package com.alcalazans.tribo.controller.dto;
+package com.alcalazans.tribo.controller.dto.response;
 
 import com.alcalazans.tribo.model.Perfil;
 import com.alcalazans.tribo.model.Usuario;
@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDTO {
+public class UsuarioDto {
     private Long id;
     private List<Perfil> perfis = new ArrayList<>();
     private String nome;
@@ -17,7 +17,7 @@ public class UsuarioDTO {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataCancelamento;
 
-    public UsuarioDTO(Usuario usuario) {
+    public UsuarioDto(Usuario usuario) {
         this.id = usuario.getId();
         this.perfis = usuario.getPerfis();
         this.nome = usuario.getNome();

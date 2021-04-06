@@ -1,4 +1,4 @@
-package com.alcalazans.tribo.controller.dto;
+package com.alcalazans.tribo.controller.dto.response;
 
 public class TokenDto {
 
