@@ -1,10 +1,18 @@
 package com.alcalazans.tribo.controller.dto.request;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class LoginRequestDto {
 
 	@NotNull @NotEmpty
@@ -12,22 +20,6 @@ public class LoginRequestDto {
 
 	@NotNull @NotEmpty
 	private String senha;
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 
 	public UsernamePasswordAuthenticationToken converter() {
 		return new UsernamePasswordAuthenticationToken(email, senha);
