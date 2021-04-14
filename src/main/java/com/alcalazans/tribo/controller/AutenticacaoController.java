@@ -2,7 +2,7 @@ package com.alcalazans.tribo.controller;
 
 import com.alcalazans.tribo.controller.dto.request.LoginRequestDto;
 import com.alcalazans.tribo.config.security.TokenService;
-import com.alcalazans.tribo.controller.dto.response.TokenDto;
+import com.alcalazans.tribo.controller.dto.response.ResponseTokenDto;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +28,13 @@ public class AutenticacaoController {
 
 	@ApiOperation(value = "Efetuar Login")
 	@PostMapping
-	public ResponseEntity<TokenDto> autenticar(@RequestBody @Validated LoginRequestDto form) {
-		UsernamePasswordAuthenticationToken dadosLogin = form.converter();
+	public ResponseEntity<ResponseTokenDto> autenticar(@RequestBody @Validated LoginRequestDto request) {
+		UsernamePasswordAuthenticationToken dadosLogin = request.converter();
 		
 		try {
 			Authentication authentication = authManager.authenticate(dadosLogin);
 			String token = tokenService.gerarToken(authentication);
-			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
+			return ResponseEntity.ok(new ResponseTokenDto(token, "Bearer"));
 		} catch (AuthenticationException e) {
 			return ResponseEntity.badRequest().build();
 		}

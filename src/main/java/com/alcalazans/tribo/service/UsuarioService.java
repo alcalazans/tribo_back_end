@@ -5,8 +5,6 @@ import com.alcalazans.tribo.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class UsuarioService {
 
@@ -14,11 +12,7 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     public Usuario findById(Long id){
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
-        if (usuario.isPresent()) {
-            return usuario.get();
-        }
-        return null;
+        return usuarioRepository.findById(id).orElseThrow();
     }
 
 
