@@ -1,5 +1,8 @@
 package com.alcalazans.tribo.config.security;
 
+import com.alcalazans.tribo.config.security.token.AuthenticationTokenFilter;
+import com.alcalazans.tribo.config.security.token.TokenService;
+import com.alcalazans.tribo.config.security.userdetails.UserDetailsServiceImpl;
 import com.alcalazans.tribo.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

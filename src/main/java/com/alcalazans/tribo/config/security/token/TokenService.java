@@ -1,7 +1,6 @@
-package com.alcalazans.tribo.config.security;
+package com.alcalazans.tribo.config.security.token;
 
-import com.alcalazans.tribo.model.Usuario;
-import io.jsonwebtoken.Claims;
+import com.alcalazans.tribo.config.security.userdetails.MyUserDetails;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,8 @@ public class TokenService {
 	public String gerarToken(Authentication authentication) {
 
 		MyUserDetails usuario = (MyUserDetails) authentication.getPrincipal();
-		Date hoje = new Date();
-		Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
+		var hoje = new Date();
+		var dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
 		
 		return Jwts.builder()
 				.setIssuer(env.getProperty("message.security.api.title"))
@@ -49,7 +48,7 @@ public class TokenService {
 	}
 
 	public String getUserName(String token) {
-		Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+		var claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
 		return claims.getSubject();
 	}
 

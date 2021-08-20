@@ -1,14 +1,13 @@
 package com.alcalazans.tribo.controller;
 
+import com.alcalazans.tribo.config.security.token.TokenService;
 import com.alcalazans.tribo.controller.dto.request.LoginRequestDto;
-import com.alcalazans.tribo.config.security.TokenService;
 import com.alcalazans.tribo.controller.dto.response.TokenResponseDto;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +31,7 @@ public class AutenticacaoController {
 		UsernamePasswordAuthenticationToken dadosLogin = request.converter();
 		
 		try {
-			Authentication authentication = authManager.authenticate(dadosLogin);
+			var authentication = authManager.authenticate(dadosLogin);
 			String token = tokenService.gerarToken(authentication);
 			return ResponseEntity.ok(new TokenResponseDto(token, "Bearer"));
 		} catch (AuthenticationException e) {

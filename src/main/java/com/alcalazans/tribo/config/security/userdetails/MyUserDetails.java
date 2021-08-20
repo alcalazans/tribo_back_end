@@ -1,4 +1,4 @@
-package com.alcalazans.tribo.config.security;
+package com.alcalazans.tribo.config.security.userdetails;
 
 import com.alcalazans.tribo.model.Usuario;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package com.alcalazans.tribo.config.security;
+package com.alcalazans.tribo.config.security.token;
 
 
 import com.alcalazans.tribo.repository.UsuarioRepository;

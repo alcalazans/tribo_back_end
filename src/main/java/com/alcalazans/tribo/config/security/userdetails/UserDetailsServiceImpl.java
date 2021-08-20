@@ -1,4 +1,4 @@
-package com.alcalazans.tribo.config.security;
+package com.alcalazans.tribo.config.security.userdetails;
 
 import com.alcalazans.tribo.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) {
-		MyUserDetails userDetails = new MyUserDetails(repository.findByEmail(username)
+		return new MyUserDetails(repository.findByEmail(username)
 				.orElseThrow(()->new UsernameNotFoundException("Usuário não encontrado!")));
-
-		return userDetails;
 	}
 }

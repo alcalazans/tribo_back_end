@@ -1,6 +1,7 @@
 package com.alcalazans.tribo.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "usuario", schema = "tribo")
 public class Usuario implements UserDetails {
@@ -45,23 +47,6 @@ public class Usuario implements UserDetails {
     @Column
     private LocalDateTime dataCancelamento;
 
-   @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Usuario other = (Usuario) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.perfis;
@@ -94,74 +79,24 @@ public class Usuario implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return  true;//situacao.equals(0);
+        return situacao.equals(0);
     }
 
-    public Long getId() {
-        return id;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Usuario other = (Usuario) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Perfil> getPerfis() {
-        return perfis;
-    }
-
-    public void setPerfis(List<Perfil> perfis) {
-        this.perfis = perfis;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public Integer getSituacao() {
-        return situacao;
-    }
-
-    public void setSituacao(Integer situacao) {
-        this.situacao = situacao;
-    }
-
-    public LocalDateTime getDataCriacao() {
-        return dataCriacao;
-    }
-
-    public void setDataCriacao(LocalDateTime dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
-
-    public LocalDateTime getDataCancelamento() {
-        return dataCancelamento;
-    }
-
-    public void setDataCancelamento(LocalDateTime dataCancelamento) {
-        this.dataCancelamento = dataCancelamento;
-    }
 }

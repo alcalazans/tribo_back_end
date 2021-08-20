@@ -1,11 +1,13 @@
 package com.alcalazans.tribo.model;
 
+import lombok.Data;
 import net.jcip.annotations.Immutable;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Immutable
 @Table(name = "perfil", schema = "tribo")
@@ -29,46 +31,6 @@ public class Perfil implements GrantedAuthority {
 
 	@Column
 	private LocalDateTime data_criacao;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Integer getSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(Integer situacao) {
-		this.situacao = situacao;
-	}
-
-	public LocalDateTime getData_criacao() {
-		return data_criacao;
-	}
-
-	public void setData_criacao(LocalDateTime data_criacao) {
-		this.data_criacao = data_criacao;
-	}
 
 	@Override
 	public String getAuthority() {
