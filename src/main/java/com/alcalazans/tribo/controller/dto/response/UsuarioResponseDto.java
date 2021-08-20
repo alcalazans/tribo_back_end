@@ -21,7 +21,7 @@ public class UsuarioResponseDto {
     private String nome;
     private String email;
     private String cpf;
-    private String situacao;
+    private Integer situacao;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataCancelamento;
 

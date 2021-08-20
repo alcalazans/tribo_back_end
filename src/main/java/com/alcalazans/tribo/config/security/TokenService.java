@@ -26,13 +26,13 @@ public class TokenService {
 
 	public String gerarToken(Authentication authentication) {
 
-		Usuario logado = (Usuario) authentication.getPrincipal();
+		MyUserDetails usuario = (MyUserDetails) authentication.getPrincipal();
 		Date hoje = new Date();
 		Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
 		
 		return Jwts.builder()
 				.setIssuer(env.getProperty("message.security.api.title"))
-				.setSubject(logado.getId().toString())
+				.setSubject(usuario.getUsername())
 				.setIssuedAt(hoje)
 				.setExpiration(dataExpiracao)
 				.signWith(SignatureAlgorithm.HS256, secret)
@@ -48,9 +48,9 @@ public class TokenService {
 		}
 	}
 
-	public Long getIdUsuario(String token) {
+	public String getUserName(String token) {
 		Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
-		return Long.parseLong(claims.getSubject());
+		return claims.getSubject();
 	}
 
 }

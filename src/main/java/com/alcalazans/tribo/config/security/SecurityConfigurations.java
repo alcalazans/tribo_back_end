@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -24,14 +25,33 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	Environment env;
 
 	@Autowired
-	private AuthenticationService authenticationService;
+	private UserDetailsServiceImpl userDetailsServiceImpl;
 	
 	@Autowired
 	private TokenService tokenService;
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
+	@Override
+	@Bean
+	public UserDetailsServiceImpl userDetailsService()  {
+		return new UserDetailsServiceImpl();
+	}
+
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder()  {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public DaoAuthenticationProvider daoAuthenticationProvider()  {
+		var authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setPasswordEncoder(passwordEncoder());
+		authenticationProvider.setUserDetailsService(userDetailsService());
+		return authenticationProvider;
+	}
+
 	@Override
 	@Bean
 	protected AuthenticationManager authenticationManager() throws Exception {
@@ -40,16 +60,15 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(authenticationService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.authenticationProvider(daoAuthenticationProvider());
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers(HttpMethod.GET, "/usuario/{id}").hasAuthority(env.getProperty("roles.usuario.comum"))
 		.antMatchers(HttpMethod.POST, "/auth").permitAll()
         .antMatchers(HttpMethod.GET, "/actuator/**").authenticated()
-		.anyRequest().permitAll()
+		.mvcMatchers("/api/usuarios/**" ).hasAuthority(env.getProperty("roles.usuario.comum"))
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().addFilterBefore(new AuthenticationTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);

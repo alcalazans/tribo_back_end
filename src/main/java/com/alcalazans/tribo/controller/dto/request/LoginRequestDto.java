@@ -16,13 +16,13 @@ import javax.validation.constraints.NotNull;
 public class LoginRequestDto {
 
 	@NotNull @NotEmpty
-	private String email;
+	private String name;
 
 	@NotNull @NotEmpty
 	private String senha;
 
 	public UsernamePasswordAuthenticationToken converter() {
-		return new UsernamePasswordAuthenticationToken(email, senha);
+		return new UsernamePasswordAuthenticationToken(name, senha);
 	}
 
 }

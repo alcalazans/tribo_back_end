@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
 
     @Autowired
@@ -18,7 +18,7 @@ public class UsuarioController {
 
     @ApiOperation(value = "Localizar usuario por id")
     @GetMapping("/{id}")
-    public UsuarioResponseDto detalhar(UsuarioRequestDto dto){
+    public UsuarioResponseDto detalhar(UsuarioRequestDto dto) throws Exception {
         return new UsuarioResponseDto(usuarioService.findById(dto.getId()));
     }
 

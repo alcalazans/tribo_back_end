@@ -1,7 +1,6 @@
 package com.alcalazans.tribo.config.security;
 
 
-import com.alcalazans.tribo.model.Usuario;
 import com.alcalazans.tribo.repository.UsuarioRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,9 +36,9 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
 	}
 
 	private void autenticarCliente(String token) {
-		Long idUsuario = tokenService.getIdUsuario(token);
-		Usuario usuario = repository.findById(idUsuario).get();
-		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+		String userName = tokenService.getUserName(token);
+		var usuario = repository.findByEmail(userName).orElseThrow();
+		var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 

@@ -12,7 +12,7 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     public Usuario findById(Long id){
-        return usuarioRepository.findById(id).orElseThrow();
+        return usuarioRepository.findById(id).orElse(new Usuario());
     }
 
 

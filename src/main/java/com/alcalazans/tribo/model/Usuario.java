@@ -37,7 +37,7 @@ public class Usuario implements UserDetails {
     private String senha;
 
     @Column
-    private String situacao;
+    private Integer situacao;
 
     @Column
     private LocalDateTime dataCriacao;
@@ -94,7 +94,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return  true;//situacao.equals(0);
     }
 
     public Long getId() {
@@ -141,11 +141,11 @@ public class Usuario implements UserDetails {
         this.senha = senha;
     }
 
-    public String getSituacao() {
+    public Integer getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(String situacao) {
+    public void setSituacao(Integer situacao) {
         this.situacao = situacao;
     }
 
