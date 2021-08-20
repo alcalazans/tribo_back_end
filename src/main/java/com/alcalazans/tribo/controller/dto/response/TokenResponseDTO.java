@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class TokenResponseDto {
+public class TokenResponseDTO {
 
 	private String token;
 	private String tipo;

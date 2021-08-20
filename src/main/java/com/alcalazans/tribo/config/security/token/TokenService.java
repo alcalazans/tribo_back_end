@@ -23,7 +23,7 @@ public class TokenService {
 	@Value("${tribo.jwt.secret}")
 	private String secret;
 
-	public String gerarToken(Authentication authentication) {
+	public String generateToken(Authentication authentication) {
 
 		MyUserDetails usuario = (MyUserDetails) authentication.getPrincipal();
 		var hoje = new Date();

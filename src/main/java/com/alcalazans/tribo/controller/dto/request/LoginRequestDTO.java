@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class LoginRequestDto {
+public class LoginRequestDTO {
 
 	@NotNull @NotEmpty
 	private String name;

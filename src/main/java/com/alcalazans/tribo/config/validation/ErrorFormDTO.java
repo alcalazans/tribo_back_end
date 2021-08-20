@@ -1,11 +1,11 @@
 package com.alcalazans.tribo.config.validation;
 
-public class ErrorFormDto {
+public class ErrorFormDTO {
 	
 	private String field;
 	private String error;
 	
-	public ErrorFormDto(String field, String error) {
+	public ErrorFormDTO(String field, String error) {
 		this.field = field;
 		this.error = error;
 	}

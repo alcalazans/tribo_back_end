@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class UsuarioRequestDto {
+public class UsuarioRequestDTO {
 
     private Long id;
 
