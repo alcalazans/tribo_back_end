@@ -15,13 +15,15 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true, proxyTargetClass = true)
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -67,7 +69,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/api/auth").permitAll()
-		.mvcMatchers("/api/usuarios/**" ).hasAnyAuthority((new String[]{env.getProperty("roles.super.admin"), env.getProperty("roles.usuario.admin")}))
+		.mvcMatchers(HttpMethod.GET,"/api/negocios/").hasAnyAuthority((new String[]{env.getProperty("roles.usuario.comum"), env.getProperty("roles.usuario.admin")}))
+		.mvcMatchers("/api/usuarios/**" ).hasAnyAuthority(env.getProperty("roles.usuario.admin"))
         .antMatchers(HttpMethod.GET, "/actuator/**").authenticated()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

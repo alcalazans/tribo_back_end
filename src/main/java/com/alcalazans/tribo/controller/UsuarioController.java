@@ -1,7 +1,7 @@
 package com.alcalazans.tribo.controller;
 
-import com.alcalazans.tribo.controller.dto.request.UsuarioRequestDTO;
-import com.alcalazans.tribo.controller.dto.response.UsuarioResponseDTO;
+import com.alcalazans.tribo.controller.dto.request.UsuarioForm;
+import com.alcalazans.tribo.controller.dto.response.UsuarioDTO;
 import com.alcalazans.tribo.service.UsuarioService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +18,8 @@ public class UsuarioController {
 
     @ApiOperation(value = "Localizar usuario por id")
     @GetMapping("/{id}")
-
-    public UsuarioResponseDTO detalhar(UsuarioRequestDTO dto) {
-        return new UsuarioResponseDTO(usuarioService.findById(dto.getId()));
+    public UsuarioDTO getUsuario(UsuarioForm usuarioForm) {
+        return new UsuarioDTO(usuarioService.findById(usuarioForm.getId()));
     }
 
 

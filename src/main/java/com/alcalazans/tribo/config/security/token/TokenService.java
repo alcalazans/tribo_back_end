@@ -28,7 +28,7 @@ public class TokenService {
 		MyUserDetails usuario = (MyUserDetails) authentication.getPrincipal();
 		var hoje = new Date();
 		var dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
-		
+
 		return Jwts.builder()
 				.setIssuer(env.getProperty("message.security.api.title"))
 				.setSubject(usuario.getUsername())

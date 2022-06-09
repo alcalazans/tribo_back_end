@@ -1,4 +1,4 @@
-package com.alcalazans.tribo.controller.dto.request;
+package com.alcalazans.tribo.controller.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class UsuarioRequestDTO {
+public class TokenDTO {
 
-    private Long id;
+	private String token;
+	private String tipo;
 
 }

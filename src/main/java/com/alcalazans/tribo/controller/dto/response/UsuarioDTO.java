@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class UsuarioResponseDTO {
+public class UsuarioDTO {
     private Long id;
     private List<Perfil> perfis = new ArrayList<>();
     private String nome;
@@ -25,7 +25,7 @@ public class UsuarioResponseDTO {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataCancelamento;
 
-    public UsuarioResponseDTO(Usuario usuario) {
+    public UsuarioDTO(Usuario usuario) {
         this.id = usuario.getId();
         this.perfis = usuario.getPerfis();
         this.nome = usuario.getNome();

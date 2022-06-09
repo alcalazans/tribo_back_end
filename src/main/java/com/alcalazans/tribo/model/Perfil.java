@@ -20,8 +20,7 @@ public class Perfil implements GrantedAuthority {
 	@SequenceGenerator(name = "sq_perfil", sequenceName = "sq_perfil", schema = "tribo", allocationSize = 1)
 	private Long id;
 
-	@Column(name = "nome")
-	private String authority;
+	private String nome;
 
 	@Column
 	private String descricao;
@@ -31,5 +30,10 @@ public class Perfil implements GrantedAuthority {
 
 	@Column
 	private LocalDateTime data_criacao;
+
+	@Override
+	public String getAuthority() {
+		return this.getNome();
+	}
 
 }
