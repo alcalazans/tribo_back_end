@@ -1,4 +1,4 @@
-package com.alcalazans.tribo.controller;
+package com.alcalazans.tribo.controller.security;
 
 import com.alcalazans.tribo.config.security.token.TokenService;
 import com.alcalazans.tribo.controller.dto.request.LoginRequestDTO;

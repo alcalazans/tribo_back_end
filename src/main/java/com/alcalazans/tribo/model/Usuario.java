@@ -2,6 +2,8 @@ package com.alcalazans.tribo.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,7 +13,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Data
+@Setter
+@Getter
 @Entity
 @Table(name = "usuario", schema = "tribo")
 public class Usuario implements UserDetails {

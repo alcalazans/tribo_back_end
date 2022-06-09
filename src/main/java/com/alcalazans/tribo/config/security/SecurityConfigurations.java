@@ -12,23 +12,20 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@EnableWebSecurity
 @Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	Environment env;
-
-	@Autowired
-	private UserDetailsServiceImpl userDetailsServiceImpl;
 	
 	@Autowired
 	private TokenService tokenService;
@@ -69,9 +66,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers(HttpMethod.POST, "/auth").permitAll()
+		.antMatchers("/api/auth").permitAll()
+		.mvcMatchers("/api/usuarios/**" ).hasAnyAuthority((new String[]{env.getProperty("roles.super.admin"), env.getProperty("roles.usuario.admin")}))
         .antMatchers(HttpMethod.GET, "/actuator/**").authenticated()
-		.mvcMatchers("/api/usuarios/**" ).hasAuthority(env.getProperty("roles.usuario.comum"))
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().addFilterBefore(new AuthenticationTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);

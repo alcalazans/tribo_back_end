@@ -18,6 +18,7 @@ public class UsuarioController {
 
     @ApiOperation(value = "Localizar usuario por id")
     @GetMapping("/{id}")
+
     public UsuarioResponseDTO detalhar(UsuarioRequestDTO dto) {
         return new UsuarioResponseDTO(usuarioService.findById(dto.getId()));
     }

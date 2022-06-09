@@ -4,6 +4,7 @@ import com.alcalazans.tribo.model.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +20,7 @@ public class MyUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
-        user.getPerfis().forEach(p -> authorityList.add(new SimpleGrantedAuthority(p.getNome())));
+        user.getPerfis().forEach(p -> authorityList.add(new SimpleGrantedAuthority(p.getAuthority())));
         return authorityList;
     }
 
