@@ -1,15 +1,19 @@
 package com.tribo.aspect.usuario;
 
 import com.tribo.aspect.AbstractAcessoValidator;
-import com.tribo.config.security.SegurancaSuporte;
+import com.tribo.config.security.SegurancaSupport;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class VisualizaApenasSeusDadosAspect extends AbstractAcessoValidator {
+
+    @Autowired
+    private SegurancaSupport seguranca;
 
     @Around("@annotation(com.tribo.aspect.usuario.VisualizaApenasDadosUsuarioLogado)")
     public Object validaAcessoUsuario(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -23,7 +27,7 @@ public class VisualizaApenasSeusDadosAspect extends AbstractAcessoValidator {
 
     @Override
     public boolean isAcessoPermitido(Object id) {
-        return SegurancaSuporte.getUsuarioAutenticado().getId().equals(id) ||
-                SegurancaSuporte.isAdministrador();
+        return seguranca.getUsuarioAutenticado().getId().equals(id) ||
+                seguranca.isAdministrador();
     }
 }

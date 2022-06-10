@@ -1,4 +1,4 @@
-package com.tribo.utils;
+package com.tribo.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
