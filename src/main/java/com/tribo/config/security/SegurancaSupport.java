@@ -12,9 +12,6 @@ import org.springframework.web.context.annotation.RequestScope;
 @Setter(value = AccessLevel.PRIVATE)
 public class SegurancaSupport {
 
-    SegurancaSupport() {
-    }
-
     public Usuario getUsuarioAutenticado(){
         return (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
