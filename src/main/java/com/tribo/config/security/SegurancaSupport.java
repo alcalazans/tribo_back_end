@@ -13,7 +13,6 @@ import org.springframework.web.context.annotation.RequestScope;
 public class SegurancaSupport {
 
     SegurancaSupport() {
-        throw new IllegalStateException();
     }
 
     public Usuario getUsuarioAutenticado(){
