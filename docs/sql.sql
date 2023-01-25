@@ -7,7 +7,6 @@
 select * from usuario u
 select * from usurio
 
-
 DROP TABLE tribo.agendamento;
 DROP TABLE tribo.local;
 DROP TABLE tribo.historico_contrato;
