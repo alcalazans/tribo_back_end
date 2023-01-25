@@ -1,6 +1,5 @@
 package com.tribo.controller;
 
-import com.tribo.aspect.usuario.VisualizaApenasDadosUsuarioLogado;
 import com.tribo.controller.dto.request.UsuarioForm;
 import com.tribo.controller.dto.response.UsuarioDTO;
 import com.tribo.service.UsuarioService;
@@ -19,7 +18,7 @@ public class UsuarioController {
 
     @ApiOperation(value = "Localizar usuario por id")
     @GetMapping("/{id}")
-    @VisualizaApenasDadosUsuarioLogado
+    //@VisualizaApenasDadosUsuarioLogado
     public UsuarioDTO getUsuario(UsuarioForm usuarioForm) {
         return new UsuarioDTO(usuarioService.findById(usuarioForm.getId()));
     }
