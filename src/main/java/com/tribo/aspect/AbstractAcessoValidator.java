@@ -1,7 +1,9 @@
 package com.tribo.aspect;
 
+import com.tribo.config.security.SegurancaSupport;
 import io.jsonwebtoken.lang.Collections;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 
 import java.lang.reflect.InvocationTargetException;
@@ -9,6 +11,9 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 public abstract class AbstractAcessoValidator {
+
+    @Autowired
+    protected SegurancaSupport seguranca;
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public Object validaAcesso(ProceedingJoinPoint joinPoint) throws Throwable {

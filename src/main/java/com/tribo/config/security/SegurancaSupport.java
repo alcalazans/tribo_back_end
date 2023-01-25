@@ -12,7 +12,7 @@ import org.springframework.web.context.annotation.RequestScope;
 @Setter(value = AccessLevel.PRIVATE)
 public class SegurancaSupport {
 
-    private SegurancaSupport() {
+    SegurancaSupport() {
         throw new IllegalStateException();
     }
 
